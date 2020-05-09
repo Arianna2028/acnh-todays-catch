@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-var API_KEY = '';
+var API_KEY = 'key6kyXjGGK6x51pW';
 
 const now = moment();
 const currentMonth = now.format('MMMM');
