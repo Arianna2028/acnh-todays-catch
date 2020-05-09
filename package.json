@@ -2,7 +2,7 @@
   "name": "acnh-todays-catch",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://arianna2028.github.io/acnh-todays-catch"
+  "homepage": "http://arianna2028.github.io/acnh-todays-catch",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
