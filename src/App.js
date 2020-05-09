@@ -85,7 +85,7 @@ function isAvailableNow(item) {
 
         if (!validTime && item.fields.timeStartB) {
             var startB = Number(moment(item.fields.timeStartB).format('HH')),
-                endB = Number(moment(item.fields.timeEndB).format('HH')),
+                endB = Number(moment(item.fields.timeEndB).format('HH'));
 
             validTime = currentHour >= startB && currentHour < endB;
         }
