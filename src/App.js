@@ -24,16 +24,11 @@ function CatchablesItem(props) {
         }
     }
 
-    if (catchable.shadowSize) {
-        shadowSize = (<td>{catchable.shadowSize}</td>);
-    }
-
     return (
         <tr>
             <td>{catchable.name}</td>
             <td>{catchable.place}</td>
             <td>{catchable.sellPrice}</td>
-            {shadowSize}
             <td>{timeStr}</td>
         </tr>
     )
@@ -57,7 +52,6 @@ function FishTable(props) {
                     <th scope="col">Name</th>
                     <th scope="col">Place</th>
                     <th scope="col">Sell Price</th>
-                    <th scope="col">Shadow Size</th>
                     <th scope="col">Time</th>
                 </tr>
             </thead>
@@ -120,14 +114,12 @@ class App extends Component {
     }
 
     render() {
-        const allFish = this.state.fish;
-        const fish = allFish.filter(isAvailableNow);
-
-        console.log('Showing ' + fish.length.toString() + '/' + allFish.length.toString() + ' fish');
+        const allFish = this.state.fish,
+            fish = allFish.filter(isAvailableNow);
 
         return (
             <div className="container">
-                <h1>Right now, it is: {now.format('MMMM Do YYYY, h:mm:ss a')}</h1>
+                <h1>Right now, it is: {now.format('MMMM Do, h:mma')}</h1>
                 <FishTable catchables={fish} />
             </div>
         )
