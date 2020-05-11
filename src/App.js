@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './App.css';
+import CatchableTable from 'components/CatchableTable';
 
 var API_KEY = 'key6kyXjGGK6x51pW';
 
@@ -33,131 +34,97 @@ function isAvailableNow(item) {
     return validMonth && validTime;
 }
 
-function CatchablesItem(props) {
-    const catchable = props.value;
-    var timeStr = 'All Day';
 
-    if (catchable.timeStartA && catchable.timeEndA) {
-        var startA = moment(catchable.timeStartA).format('ha'),
-            endA = moment(catchable.timeEndA).format('ha');
+// class FishTable extends Component {
 
-        timeStr = startA + ' - ' + endA;
+//     constructor(props) {
+//         super(props);
 
-        if (catchable.timeStartB && catchable.timeEndB) {
-            var startB = moment(catchable.timeStartB).format('ha'),
-                endB = moment(catchable.timeEndB).format('ha');
-            timeStr = timeStr + ', ' + startB + ' - ' + endB;
-        }
-    }
+//         this.state = {
+//             rows: [],
+//             sortDirection: 'asc',
+//             sortField: 'name'
+//         }
+//     }
 
-    return (
-        <tr>
-            <td>{catchable.name}</td>
-            <td>{catchable.place}</td>
-            <td>{catchable.sellPrice}</td>
-            <td>{timeStr}</td>
-        </tr>
-    )
-}
+//     componentDidMount() {
+//         if (this.state.rows.length < 1) {
+//             fetch('https://api.airtable.com/v0/apphC982qIGZ5B8Zp/Fish', {
+//                 headers: {
+//                     'Authorization': 'Bearer ' + API_KEY
+//                 }
+//             })
+//             .then((resp) => resp.json())
+//             .then(data => {
+//                 if (data.records) {
+//                     this.setState({ rows: data.records });
+//                 }
+//             });
+//         }
+//     }
 
-function CatchablesList(props) {
-    const catchables = props.catchables;
+//     setSort(newSortField) {
+//         if (newSortField == this.state.sortField) {
+//             this.setState({ sortDirection: this.state.sortDirection === 'asc' ? 'desc' : 'asc'});
+//         } else {
+//             this.setState({
+//                 sortField: newSortField,
+//                 sortDirection: 'asc'
+//             });
+//         }
+//     }
 
-    return (
-        catchables.map((f) => <CatchablesItem key={f.id} value={f.fields} />)
-    );
-}
+//     sortByName(a, b) {
+//         return a.fields.name > b.fields.name ? 1 : -1;
+//     }
 
-class FishTable extends Component {
+//     sortByPlace(a, b) {
+//         return a.fields.place > b.fields.place ? 1 : -1;
+//     }
 
-    constructor(props) {
-        super(props);
+//     sortByPrice(a, b) {
+//         return a.fields.sellPrice > b.fields.sellPrice ? 1 : -1;
+//     }
 
-        this.state = {
-            rows: [],
-            sortDirection: 'asc',
-            sortField: 'name'
-        }
-    }
+//     render() {
+//         var rows = this.state.rows.filter(isAvailableNow),
+//             iconName = this.state.sortDirection === 'desc' ? 'caret-down' : 'caret-up',
+//             icon = (<FontAwesomeIcon icon={iconName} />),
+//             nameIcon, placeIcon, priceIcon;
 
-    componentDidMount() {
-        if (this.state.rows.length < 1) {
-            fetch('https://api.airtable.com/v0/apphC982qIGZ5B8Zp/Fish', {
-                headers: {
-                    'Authorization': 'Bearer ' + API_KEY
-                }
-            })
-            .then((resp) => resp.json())
-            .then(data => {
-                if (data.records) {
-                    this.setState({ rows: data.records });
-                }
-            });
-        }
-    }
+//         if (this.state.sortField === 'name') {
+//             rows.sort(this.sortByName);
+//             nameIcon = icon;
+//         } else if (this.state.sortField === 'place') {
+//             rows.sort(this.sortByPlace);
+//             placeIcon = icon;
+//         } else if (this.state.sortField === 'price') {
+//             rows.sort(this.sortByPrice);
+//             priceIcon = icon;
+//         }
 
-    setSort(newSortField) {
-        if (newSortField == this.state.sortField) {
-            this.setState({ sortDirection: this.state.sortDirection === 'asc' ? 'desc' : 'asc'});
-        } else {
-            this.setState({
-                sortField: newSortField,
-                sortDirection: 'asc'
-            });
-        }
-    }
+//         if (this.state.sortDirection === 'desc') {
+//             rows.reverse();
+//         }
 
-    sortByName(a, b) {
-        return a.fields.name > b.fields.name ? 1 : -1;
-    }
+//         return (
+//             <table className="table table-striped table-dark">
+//                 <thead>
+//                     <tr>
+//                         <th scope="col" onClick={this.setSort.bind(this, 'name')} className="border-top-0">Name {nameIcon}</th>
+//                         <th scope="col" onClick={this.setSort.bind(this, 'place')} className="border-top-0">Place {placeIcon}</th>
+//                         <th scope="col" onClick={this.setSort.bind(this, 'price')} className="border-top-0">Sell Price {priceIcon}</th>
+//                         <th scope="col" className="border-top-0">Time</th>
+//                     </tr>
+//                 </thead>
 
-    sortByPlace(a, b) {
-        return a.fields.place > b.fields.place ? 1 : -1;
-    }
-
-    sortByPrice(a, b) {
-        return a.fields.sellPrice > b.fields.sellPrice ? 1 : -1;
-    }
-
-    render() {
-        var rows = this.state.rows.filter(isAvailableNow),
-            iconName = this.state.sortDirection === 'desc' ? 'caret-down' : 'caret-up',
-            icon = (<FontAwesomeIcon icon={iconName} />),
-            nameIcon, placeIcon, priceIcon;
-
-        if (this.state.sortField === 'name') {
-            rows.sort(this.sortByName);
-            nameIcon = icon;
-        } else if (this.state.sortField === 'place') {
-            rows.sort(this.sortByPlace);
-            placeIcon = icon;
-        } else if (this.state.sortField === 'price') {
-            rows.sort(this.sortByPrice);
-            priceIcon = icon;
-        }
-
-        if (this.state.sortDirection === 'desc') {
-            rows.reverse();
-        }
-
-        return (
-            <table className="table table-striped table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col" onClick={this.setSort.bind(this, 'name')} className="border-top-0">Name {nameIcon}</th>
-                        <th scope="col" onClick={this.setSort.bind(this, 'place')} className="border-top-0">Place {placeIcon}</th>
-                        <th scope="col" onClick={this.setSort.bind(this, 'price')} className="border-top-0">Sell Price {priceIcon}</th>
-                        <th scope="col" className="border-top-0">Time</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <CatchablesList catchables={rows} />
-                </tbody>
-            </table>
-        )
-    }
-}
+//                 <tbody>
+//                     <CatchablesList catchables={rows} />
+//                 </tbody>
+//             </table>
+//         )
+//     }
+// }
 
 class App extends Component {
 
@@ -169,12 +136,12 @@ class App extends Component {
                 <div className="row">
                     <div className="col">
                         <div className="card bg-dark fish-card">
-                            <FishTable />
+                            <CatchableTable />
                         </div>
                     </div>
                     <div className="col">
                         <div className="card bg-dark fish-card">
-                            <FishTable />
+                            <CatchableTable />
                         </div>
                     </div>
                 </div>
