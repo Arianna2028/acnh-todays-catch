@@ -52,7 +52,7 @@ class CatchableTable extends Component {
     }
 
     setSort(newSortField) {
-        if (newSortField == this.state.sortField) {
+        if (newSortField === this.state.sortField) {
             this.setState({ sortDirection: this.state.sortDirection === 'asc' ? 'desc' : 'asc'});
         } else {
             this.setState({
