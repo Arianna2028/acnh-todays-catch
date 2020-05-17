@@ -60,7 +60,7 @@ class App extends Component {
 
                 <div className="row">
                     <div className="col">
-                        <div className="card bg-dark table-card">
+                        <div className="card bg-dark table-card table-card-sm">
                             {this.state.activeTab === 'fish' ? <FishTable /> : <BugTable />}
                         </div>
                     </div>
