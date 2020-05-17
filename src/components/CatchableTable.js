@@ -99,9 +99,9 @@ class CatchableTable extends Component {
             <table className="table table-striped table-dark">
                 <thead>
                     <tr>
-                        <th scope="col" onClick={this.setSort.bind(this, 'name')} className="border-top-0 clickable">Name {nameIcon}</th>
-                        <th scope="col" onClick={this.setSort.bind(this, 'place')} className="border-top-0 clickable">Place {placeIcon}</th>
-                        <th scope="col" onClick={this.setSort.bind(this, 'price')} className="border-top-0 clickable">Sell Price {priceIcon}</th>
+                        <th scope="col" onClick={this.setSort.bind(this, 'name')} className="border-top-0 text-nowrap clickable">Name {nameIcon}</th>
+                        <th scope="col" onClick={this.setSort.bind(this, 'place')} className="border-top-0 text-nowrap clickable">Place {placeIcon}</th>
+                        <th scope="col" onClick={this.setSort.bind(this, 'price')} className="border-top-0 text-nowrap clickable">Sell Price {priceIcon}</th>
                         <th scope="col" className="border-top-0">Time</th>
                     </tr>
                 </thead>
