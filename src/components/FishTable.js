@@ -1,5 +1,4 @@
 import CatchableTable from './CatchableTable';
-import API_KEY from '../utils/api';
 
 class FishTable extends CatchableTable {
 
@@ -7,7 +6,7 @@ class FishTable extends CatchableTable {
         if (this.state.rows.length < 1) {
             fetch('https://api.airtable.com/v0/apphC982qIGZ5B8Zp/Fish', {
                 headers: {
-                    'Authorization': 'Bearer ' + API_KEY
+                    'Authorization': 'Bearer ' + process.env.AIR_TABLE_API_KEY
                 }
             })
             .then((resp) => resp.json())
