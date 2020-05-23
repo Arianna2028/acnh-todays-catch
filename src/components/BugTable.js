@@ -1,5 +1,4 @@
 import CatchableTable from './CatchableTable';
-import API_KEY from '../utils/api';
 
 class BugTable extends CatchableTable {
 
