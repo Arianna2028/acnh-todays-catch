@@ -6,7 +6,7 @@ class BugTable extends CatchableTable {
         if (this.state.rows.length < 1) {
             fetch('https://api.airtable.com/v0/apphC982qIGZ5B8Zp/Bugs', {
                 headers: {
-                    'Authorization': 'Bearer ' + process.env.AIR_TABLE_API_KEY
+                    'Authorization': 'Bearer ' + process.env.REACT_APP_AIR_TABLE_API_KEY
                 }
             })
             .then((resp) => resp.json())
