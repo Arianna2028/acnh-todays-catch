@@ -51,10 +51,10 @@ class App extends Component {
                 <h3 className="text-white mb-3 mt-2">Right now, it is: {now.format('MMMM Do, h:mma')}</h3>
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
-                        <a className={this.state.activeTab === 'fish' ? 'nav-link active' : 'nav-link'} href="#" onClick={this.setTab.bind(this, 'fish')}>Fish</a>
+                        <button className={this.state.activeTab === 'fish' ? 'nav-link active' : 'nav-link'} onClick={this.setTab.bind(this, 'fish')}>Fish</button>
                     </li>
                     <li className="nav-item">
-                        <a className={this.state.activeTab === 'bugs' ? 'nav-link active' : 'nav-link'} href="#" onClick={this.setTab.bind(this, 'bugs')}>Bugs</a>
+                        <button className={this.state.activeTab === 'bugs' ? 'nav-link active' : 'nav-link'} onClick={this.setTab.bind(this, 'bugs')}>Bugs</button>
                     </li>
                 </ul>
 
